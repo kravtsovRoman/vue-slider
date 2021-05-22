@@ -1,0 +1,28 @@
+// Variables
+
+// Colors
+// -------------------------
+$white:                     #fff !default;
+$black:                     #000 !default;
+$grey:                      #D0D3D4 !default;
+$green:                     #2ea555 !default;
+$yellow:                    #ffd525 !default;
+$blue:                      #1a8cff !default;
+$red:                       #FD0F2B !default;
+
+
+// Breakpoints
+// -------------------------
+$mobileWidth:               "480px";
+$largeMobileWidth:          "600px";
+$tabletWidth:               "768px";
+$desktopWidth:              "992px";
+$largeDesktopWidth:         "1392px";
+
+
+// Animation
+// -------------------------
+$transTime:                 0.3s;
+$transTimeFast:             $transTime * 0.5;
+$transTimeSlow:             $transTime * 1.5;
+$transTimeSuperSlow:        $transTime * 2;

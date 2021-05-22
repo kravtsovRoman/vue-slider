@@ -1,0 +1,14 @@
+//base style
+
+* {
+  box-sizing: border-box;
+
+  &:active {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  }
+
+  &:focus {
+    outline: none !important;
+  }
+}
+

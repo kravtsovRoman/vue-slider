@@ -1,11 +1,11 @@
-# app
+# Kilometrix Slider
 
-## Change directory
+### Change directory
 ```
 cd app
 ```
 
-## Project setup
+### Project setup
 ```
 npm install
 ```

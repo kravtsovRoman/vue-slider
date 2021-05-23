@@ -7,18 +7,20 @@
             v-for="(item, index) in data.slides"
             :key="item.id + index"
             :data="item"
-            :slide="index+1"
-            :class="activeSlide === index+1 ? 'kilometrix-slide--active' : ''"
+            :slide="index"
+            :class="activeSlide === index ? 'kilometrix-slide--active' : ''"
         />
       </div>
 
       <div class="kilometrix-slider__controls">
         <KilometrixSliderButton
-            v-for="(button, index) in data.controls"
-            :key="button.title + index"
-            :data="button"
+            v-for="(item, index) in data.slides"
+            :key="item.id + index"
+            :data="item"
+            :timeChangeSlide="data.timeChangeSlide"
             :index="index"
-            @changeSlide="changeActiveSlide"
+            :activeSlide="activeSlide"
+            @changeSlide="changeSlide(index)"
         />
       </div>
 
@@ -34,42 +36,32 @@ import KilometrixSliderButton from '@/components/kilometrix-slider/kilometrix-sl
 export default {
   name: 'KilometrixSlider',
   props: ['data'],
-
-  data(){
-    return {
-      activeSlide: 1,
-      interval: null,
-    }
-  },
-
-  methods: {
-    changeSlide(){
-      this.interval = setInterval(() => {
-        if(this.activeSlide >= this.data.slides.length) {
-          this.activeSlide = 0
-        }
-        this.activeSlide++
-      }, this.data.timeChangeSlide)
-    },
-
-    changeActiveSlide(index){
-      this.activeSlide = index
-      clearInterval(this.interval)
-      this.changeSlide()
-    }
-  },
-
   components: {
     KilometrixSliderSlide,
     KilometrixSliderButton
   },
 
-  mounted() {
-    this.changeSlide()
+  data(){
+    return {
+      activeSlide: 0,
+      interval: null,
+      slidesLength: this.data.slides.length - 1,
+    }
   },
 
-  destroyed() {
-    clearInterval(this.interval)
+  methods: {
+    changeSlide(index){
+      clearInterval(this.interval)
+      this.activeSlide = index > this.slidesLength ? 0 : index
+
+      this.interval = setInterval(() => {
+        this.changeSlide(++this.activeSlide)
+      }, this.data.timeChangeSlide)
+    },
+  },
+
+  mounted() {
+    this.changeSlide(this.activeSlide)
   }
 }
 </script>

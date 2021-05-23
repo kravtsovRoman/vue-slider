@@ -7,7 +7,6 @@
             v-for="(item, index) in data.slides"
             :key="item.id + index"
             :data="item"
-            :slide="index"
             :class="activeSlide === index ? 'kilometrix-slide--active' : ''"
         />
       </div>
@@ -16,11 +15,14 @@
         <KilometrixSliderButton
             v-for="(item, index) in data.slides"
             :key="item.id + index"
-            :data="item"
+            :button="item"
             :timeChangeSlide="data.timeChangeSlide"
             :index="index"
+            :autoplay="autoplay"
             :activeSlide="activeSlide"
             @changeSlide="changeSlide(index)"
+            @stopSlider="stopSlider"
+            @startSlider="startSlider"
         />
       </div>
 
@@ -35,33 +37,55 @@ import KilometrixSliderButton from '@/components/kilometrix-slider/kilometrix-sl
 
 export default {
   name: 'KilometrixSlider',
-  props: ['data'],
+
+  props: {
+    data: {
+      type: Object,
+      required: true
+    }
+  },
+
   components: {
     KilometrixSliderSlide,
     KilometrixSliderButton
   },
 
-  data(){
+  data() {
     return {
       activeSlide: 0,
+      autoplay: this.data.autoplay,
       interval: null,
       slidesLength: this.data.slides.length - 1,
     }
   },
 
   methods: {
-    changeSlide(index){
+    changeSlide(index) {
       clearInterval(this.interval)
       this.activeSlide = index > this.slidesLength ? 0 : index
 
-      this.interval = setInterval(() => {
-        this.changeSlide(++this.activeSlide)
-      }, this.data.timeChangeSlide)
+      if (this.autoplay) {
+        this.interval = setInterval(() => {
+          this.changeSlide(++this.activeSlide)
+        }, this.data.timeChangeSlide)
+      } else {
+        this.changeSlide(this.activeSlide)
+      }
     },
+
+    stopSlider() {
+      clearInterval(this.interval)
+    },
+
+    startSlider() {
+      if (this.autoplay) {
+        this.changeSlide(this.activeSlide)
+      }
+    }
   },
 
   mounted() {
-    this.changeSlide(this.activeSlide)
+    this.startSlider()
   }
 }
 </script>

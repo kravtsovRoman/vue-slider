@@ -1,8 +1,6 @@
 .kilometrix-slider {
-  width: 90%;
-  height: 80vh;
-  margin: 50px auto;
-  border: 10px solid #ccc;
+  height: 100vh;
+  font-family: Roboto, sans-serif;
 
   &__container {
     width: 100%;
@@ -16,19 +14,13 @@
     position: relative;
   }
 
-  &__slide {
-
-  }
-
   &__controls {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     display: flex;
-  }
-
-  &__control {
+    align-items: flex-end;
 
   }
 }

@@ -16,8 +16,13 @@
     </div>
 
     <div class="kilometrix-button__wrap">
-      <div class="kilometrix-button__number">{{ number }}</div>
-      <span class="kilometrix-button__text">{{ button.buttonTitle }}</span>
+      <span class="kilometrix-button__text">
+        <div class="kilometrix-button__number-wrap">
+          <div class="kilometrix-button__number">{{ number }}</div>
+          <div class="kilometrix-button__count">/0{{countSlides}}</div>
+        </div>
+        {{ button.buttonTitle }}
+      </span>
     </div>
   </div>
 </template>
@@ -49,6 +54,9 @@ export default {
     autoplay: {
       type: Boolean,
       default: false
+    },
+    countSlides: {
+      type: Number,
     },
   },
 

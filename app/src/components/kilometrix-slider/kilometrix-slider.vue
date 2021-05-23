@@ -20,6 +20,7 @@
             :index="index"
             :autoplay="autoplay"
             :activeSlide="activeSlide"
+            :countSlides="data.slides.length"
             @changeSlide="changeSlide(index)"
             @stopSlider="stopSlider"
             @startSlider="startSlider"

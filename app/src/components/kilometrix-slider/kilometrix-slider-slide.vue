@@ -1,5 +1,5 @@
 <template>
-  <div class="kilometrix-slider__slide kilometrix-slide" :style="`background-image: url(${slideBackground}});`">
+  <div class="kilometrix-slider__slide kilometrix-slide" :style="`background-image: url(${data.imagePath}});`">
     <div class="kilometrix-slide__content">
       <h2 class="kilometrix-slide__title">
           <span
@@ -28,18 +28,11 @@
 
 export default {
   name: 'KilometrixSliderSlide',
-
   props: {
     data: {
       type: Object,
       required: true
     }
   },
-
-  computed: {
-    slideBackground() {
-      return this.data.imagePath
-    }
-  }
 }
 </script>
